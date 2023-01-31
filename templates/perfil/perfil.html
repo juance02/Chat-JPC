@@ -1,0 +1,112 @@
+{% extends 'chat/index.html' %}
+{% load static %}
+
+	
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/perfil1.css' %}">
+
+<body>
+	<div class="container12">
+		<header class="cabecalho">
+			<div class="perfil">
+				<a href="{{ user.perfil.image.url }}" class="image-popup"><img class="perfil-foto" src="{{ user.perfil.image.url }}"></a>
+				<div class="titulo">
+					<h1>{{user.username}}</h1>
+					<h3>{{ user.perfil.descripcion }}<div>#imersaodev</div>
+						{% if request.user.is_authenticated %}
+						{% if user.username != request.user.username %}
+							{% if user not in request.user.perfil.seguir %}
+							<button><a class="follow-button" href="{% url 'seguir' user %}">Seguir</a></button>
+							{% else %}
+							<button><a class="follow-button" href="{% url 'dejardeseguir' user %}">Dejar de Seguir</button>
+							{% endif %}
+						{% endif %}
+					{% endif %}
+					</h3>
+				</div>
+			</div>
+			<button class="darkMode" onclick="alterarTema()"><img src="https://cdn4.iconfinder.com/data/icons/music-ui-solid-24px/24/moon_dark_mode_night-2-512.png" class="imgDark"></button>
+		</header>
+		<main class="projetos">
+			<div>
+				<h2>Projetos</h2>
+				<ul id="lista"></ul>
+			</div>
+			<div id="imagens"></div>
+		</main>
+		<div class="follow">
+			<div>
+				<h5>Productos</h5>
+				<p>{{ user.product.count }}</p>
+			</div>
+			<div>
+				<h5>Seguiendo</h5>
+				<p>{{ user.perfil.seguir.count }}</p>
+		
+			</div>
+			<div>
+				<h5>Seguidores</h5>
+				<p>{{ user.perfil.dejardeseguir.count }}</p>
+			</div>
+	
+		</div>
+		{% if request.user.is_authenticated %}
+			{% if user.username == request.user.username %}
+				<center><h3><a href="{% url 'agregar_Perfil' %}" class="btn btn-primary py-3 px-4">Edit Perfil</a></h3></center>
+			{% else %}
+				<center><h3><a href="{% url 'chat' request.user.id user.id %}" id="user{{ user.id }}" class="btn btn-primary py-3 px-4">Envia un mensaje</a></h3></center>
+			
+			{% endif %}
+		{% endif %}
+
+	<!-- 	<footer>
+			<a href="https://github.com/SergioJunior13" target="_blank"><img src="https://github.com/SergioJunior13/Imagens/raw/main/GitHub-Mark-32px.png" class="github-logo"></a>
+			<a href="https://codepen.io/sergiojunior13" target="_blank">
+				<img src="https://maxcdn.icons8.com/Android_L/PNG/512/Logos/codepen-512.png">
+			</a>
+			<a href="https://www.linkedin.com/in/sergiojunior15" target="_blank">
+				<img src="https://cdn-icons-png.flaticon.com/512/49/49656.png?w=1060">
+			</a>
+		</footer> -->
+	</div>
+
+</body>
+{% endblock %}
+
+<!-- 
+<body>
+
+	<div class="profile">
+		<a href="{{ user.perfil.image.url }}" class="image-popup"><img src="{{ user.perfil.image }}" class="img-fluid" alt="Colorlib Template"></a>
+		
+		<h2>@{{ user.username }}</h2>
+	</div>
+	
+	<div class="follow">
+		<div>
+			<h5>Productos</h5>
+			<p>{{ user.product.count }}</p>
+		</div>
+		<div>
+			<h5>Seguiendo</h5>
+			<p>{{ user.perfil.seguir.count }}</p>
+	
+		</div>
+		<div>
+			<h5>Seguidores</h5>
+			<p>{{ user.perfil.dejardeseguir.count }}</p>
+		</div>
+
+	</div>
+		
+	
+		<div class="container"> 
+			<h3><a href="{% url 'agregar_Perfil' %}" class="btn btn-primary py-3 px-4">Edit Perfil</a></h3>
+			<div class="ele">
+				<h2>Descripcion</h2>
+				<p>{{ user.perfil.descripcion }}</p>
+				
+			   </div>
+</body>
+</html>
+			 -->

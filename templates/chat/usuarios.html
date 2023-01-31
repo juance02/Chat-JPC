@@ -1,0 +1,37 @@
+{% extends 'chat/index.html' %}
+{% load static %}
+{% block content %}
+<br><br><br>
+<link rel="stylesheet" href="{% static 'css/users.css' %}">  
+<div class="row">
+    {% for post in  perfil_list %}
+          
+    <article>
+        <div class="container-article"> 
+            <a  href="{% url 'perfil' post.perfil.user.username %}"><img src="{{ post.perfil.image.url }}"></a>
+            <div>
+                <h2 class="username"><a href="{% url 'chat' request.user.id post.perfil.user.id %}"id="user{{ user.id }}">{{ post.perfil.user.username }}</a></h2>
+                <i class="clock"></i>
+                <time data-time="#">5 seconds ago</time>
+                <div class="post">Hello, Gotham!</div>
+            </div>
+        
+        </div>
+    </article>
+    
+ 
+
+    {% empty %}
+
+  <div class="card w-100">
+
+    <h4>No se encontraron productos en esta categoria </h4>
+  </div>
+    {% endfor %}	
+    <br><br><br>
+    <br><br><br>
+    <br><br><br>
+    <br><br><br>
+    <br><br><br>
+    <br><br>
+{% endblock %}

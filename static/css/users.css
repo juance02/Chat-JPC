@@ -1,0 +1,39 @@
+
+article{
+	width: 93%;
+	margin: auto;
+	padding: 40px 0;
+	border-bottom: 2px solid #ECEEEF;
+}
+
+.username{
+	margin-bottom: .2rem;
+}
+
+.username a{
+	font-size: 1.1rem;
+}
+
+.container-article{
+  display: flex;
+}
+
+.container-article img{
+  height: 68px;
+  width: 68px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+article:last-child {
+  border-bottom: 0;
+}
+
+time {
+  font-size: .8rem;
+  opacity: .7;
+}
+
+.post{
+	font-size: .94rem;
+}

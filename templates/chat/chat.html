@@ -1,0 +1,106 @@
+{% extends 'chat/index.html' %}
+{% load static %}
+
+<head>
+
+        <!--Import Google Icon Font-->
+          <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+          <!--Import materialize.css-->
+          <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+          <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"  media="screen,projection"/>
+  
+        <!--Let browser know website is optimized for mobile-->
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+        <!--Import jQuery before materialize.js-->
+          <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+          <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+          <script type="text/javascript" src="{% static 'js/chat.js' %}"></script>
+
+  
+
+</head>
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/materialize.css' %}"  media="screen,projection"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"  media="screen,projection"/>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% block body %}
+<body>
+    
+
+    <div class="section_juan" style="height: 90vh">
+    <div class="row">
+        <div class="col s3">
+        <div class="card">
+            <div class="collection_juan">
+                
+                {% if request.user.is_authenticated %}
+                {% for user in users %}
+							{% if user not in request.user.perfil.seguir %}
+                                    
+							{% else %}
+                            <a href="{% url 'chat' request.user.id user.id %}" id="user{{ user.id }}" class="collection-item row">
+                                <div class="col s8">
+                                    <span class="title" style="font-weight: bolder">{{ user.username }}</span>
+                                    
+                                </div>
+                                    <a  href="{% url 'perfil' user.username %}"><img src="{{ user.perfil.image.url }}" height="60px" width="60px" style="border-radius: 50% ;" ></a>
+                            </a>
+                                
+							{% endif %}
+                    {% endfor %}
+					{% endif %}
+            </div>
+        </div>
+        </div>
+        <div class="col s9">
+            <div class="card">
+            <div id="board" class="section grey lighten-3" style="height: 68vh; padding: 5px; overflow-y: scroll">
+                {% block messages %}
+
+                {% endblock %}
+            </div>
+            <form id="chat-box" class="form-group {% block hide %}hide{% endblock %}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col s11">
+                        <div class="input-field">
+                            <input id="id_message" name="message" type="text" placeholder="Ingresa tu mensaje..">
+                        </div>
+                    </div>
+                    <div class="col s1" style="line-height: 80px">
+                        <button class="btn btn-floating blue lighten-2 waves-effect waves-light"><i class="material-icons">send</i></button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    {% load static %}
+    <script src="{% static 'js/chat.js' %}"></script>
+    <script>
+        // For receiving
+        sender_id = "{{ receiver.id }}";
+        receiver_id = "{{ request.user.id }}";
+
+        //For sending
+        $(function () {
+            scrolltoend();
+            $('#chat-box').on('submit', function (event) {
+                event.preventDefault();
+                var message = $('#id_message');
+                send('{{ request.user.username }}', '{{ receiver.username }}', message.val());
+                message.val('');
+            })
+        })
+    </script>
+</body>
+{% endblock %}
+{% endblock %}

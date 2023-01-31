@@ -1,0 +1,127 @@
+{% extends 'chat/index.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+<html>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+<head>
+    <link rel="stylesheet" href="{% static 'css/edit_perfi.css' %}">
+</head>
+
+<body>
+    <main>
+      <div class="container">
+        <div class="left box-primary">
+        <form class="form-horizontal" method="post" enctype="multipart/form-data" >
+          <img class="image" src="{{ user.perfil.image.url }}" alt="" />
+          <h3 class="username text-center">{{ user.username }}</h3>
+          <a href="" class="btn btn-primary btn-block"><b>{{ p_formulario.image }}</b></a>
+        </div>
+        <div class="right tab-content">
+          
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="inputName" class="col-sm-2 control-label">Usuario</label>
+  
+              <div class="col-sm-10">
+
+                <!-- <input type="email" class="form-control" id="username" placeholder="Nome"> -->
+                {{ u_formulario.username}}
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="first_name" class="col-sm-2 control-label">Nombre</label>
+              {{ u_formulario.first_name }}
+              <div class="col-sm-10">
+                <!-- <input type="text" class="form-control" id="first_name" placeholder="Nome"> -->
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="descripcion" class="col-sm-2 control-label">Descripcion</label>
+              <div class="col-sm-10">
+                <!-- <input type="texttarea" class="form-control" id="descripcion" placeholder="Email"> -->
+                {{ p_formulario.descripcion }}
+              </div>
+            </div>
+            <div class="form-group">
+              <div class= "col-sm-12 has-feedback">
+                <label for="" class="control-label">Modalidades que deseja participar</label>
+                <select title="Para escolher várias modalidades, segure a tecla Ctrl" alt="Para escolher várias modalidades, segure a tecla Ctrl" name="modalidades[]" class="form-control" multiple="">
+                
+                </select>
+              </div>
+            </div>
+              </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-danger">Guardar Cambios</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <br>
+    <br>
+    <br>
+    <br>
+  </body>
+
+
+
+<!-- <br><br>
+<div class="row">
+    <div class="col-12 col-md-6 offset-md-3">
+        <div class="card">
+            
+            <div class="card-body">
+                <h2>Perfil</h2>
+                <hr>
+                <form class="col pr-0" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="input-wraper">
+                    <label>Nombre</label>
+                    {{ u_formulario.first_name }}
+                </div>
+                
+                <div class="input-wraper">
+                    <label for="user-name-id">Username</label>
+                    {{ u_formulario.username }}
+                </div>
+
+                <div class="input-wraper">
+                    <label>descripcion</label>
+                    {{ p_formulario.descripcion }}
+                </div>
+
+                <div class="input-wraper">
+                    
+                    {{ p_formulario.image }}
+                </div>
+                
+                <div class="d-felx justify-content-end">
+                <input type="reset" value="Cancelar" class="btn btn-secondary">
+                 &nbsp;
+                 <button class="btn btn-primary">Actualizar</button>
+            </div>
+        </form>
+        {{mensaje}}
+    </div>
+</div>
+</div>
+</div>   
+
+
+</body>
+</html> -->
+
+
+{% endblock %}
+</html>
