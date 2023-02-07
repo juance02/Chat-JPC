@@ -42,15 +42,15 @@
                 
                 {% if request.user.is_authenticated %}
                 {% for user in users %}
-							{% if user not in request.user.perfil.seguir %}
+							{% if user not in request.user.userperfil.seguir %}
                                     
 							{% else %}
                             <a href="{% url 'chat' request.user.id user.id %}" id="user{{ user.id }}" class="collection-item row">
                                 <div class="col s8">
-                                    <span class="title" style="font-weight: bolder">{{ user.username }}</span>
+                                    <span class="title" style="font-weight: bolder">{{ user.nombreusuario }}</span>
                                     
                                 </div>
-                                    <a  href="{% url 'perfil' user.username %}"><img src="{{ user.perfil.image.url }}" height="60px" width="60px" style="border-radius: 50% ;" ></a>
+                                    <a  href="{% url 'perfil' user.nombreusuario %}"><img src="{{user.userperfil.image_perfil.url}}" height="60px" width="60px" style="border-radius: 50% ;" ></a>
                             </a>
                                 
 							{% endif %}
@@ -80,6 +80,9 @@
                 </div>
             </form>
             </div>
+
+
+            
         </div>
     </div>
     </div>
@@ -88,7 +91,7 @@
     <script>
         // For receiving
         sender_id = "{{ receiver.id }}";
-        receiver_id = "{{ request.user.id }}";
+        receiver_id = "{{ request.user.nombreusuario.id }}";
 
         //For sending
         $(function () {
@@ -96,7 +99,7 @@
             $('#chat-box').on('submit', function (event) {
                 event.preventDefault();
                 var message = $('#id_message');
-                send('{{ request.user.username }}', '{{ receiver.username }}', message.val());
+                send('{{ request.user.nombreusuario }}', '{{ receiver.nombreusuario }}', message.val());
                 message.val('');
             })
         })

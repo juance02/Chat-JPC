@@ -8,9 +8,9 @@
           
     <article>
         <div class="container-article"> 
-            <a  href="{% url 'perfil' post.perfil.user.username %}"><img src="{{ post.perfil.image.url }}"></a>
+            <a  href="{% url 'perfil' post.userperfil.user.nombreusuario %}"><img src="{{ post.user.userperfil.image_perfil.url }}"></a>
             <div>
-                <h2 class="username"><a href="{% url 'chat' request.user.id post.perfil.user.id %}"id="user{{ user.id }}">{{ post.perfil.user.username }}</a></h2>
+                <h2 class="nombres"><a href="{% url 'chat' request.user.id post.userperfil.user.id %}"id="user{{ user.id }}">{{ post.userperfil.user.nombres }}</a></h2>
                 <i class="clock"></i>
                 <time data-time="#">5 seconds ago</time>
                 <div class="post">Hello, Gotham!</div>
