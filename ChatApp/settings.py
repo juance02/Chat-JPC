@@ -28,7 +28,8 @@ SECRET_KEY = '#nv&7=my(8drxahj9-1-_rdmvy8n)$#cdzg0ty1$-aa=unw+$4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['chatjpc.com','127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['http://_b36681dd1b85508186770c34dd4666c1.chatjpc.com']
 
 
 # Application definition
@@ -101,6 +102,11 @@ DATABASES = {
         'PASSWORD': '',
         'PORT': '3306',
         'HOST': '127.0.0.1'
+        #'NAME': "mysql",
+        #'USER': "root",
+        #'PASSWORD': 'vXRGA2M12D72kJj9',
+        #'PORT': '3306',
+        #'HOST': 'vXRGA2M12D72kJj9',
     }
 }
 
